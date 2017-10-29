@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 $Animals = [
     'Europe' => [
         'Alauda arvensis',
@@ -31,6 +32,8 @@ echo '<h2>Исходный массив:</h2>';
 echo '<pre>';
 print_r($Animals);
 
+$TwoWordAnimals = [];
+
 foreach ($Animals as $continent => $animaltypes) {
     foreach ($animaltypes as $animaltype) {
         If (substr_count($animaltype, ' ') ==  1) {
@@ -43,16 +46,20 @@ echo '<h2>Массив только из двух слов:</h2>';
 echo '<pre>';
 print_r($TwoWordAnimals);
 
+$AnimalsPart1 = [];
+$AnimalsPart1 = [];
+
 foreach ($TwoWordAnimals as $continent => $animaltypes) {
     foreach ($animaltypes as $animaltype) {
-        $SpacePos=strpos($animaltype, " ", 0);
-        $AnimalsPart1[$continent][] = substr($animaltype, 0, $SpacePos);
-        $AnimalsPart2[] = substr($animaltype, $SpacePos+1,  strlen ($animaltype)-$SpacePos+1);
+        $pieces = explode(" ", $animaltype);
+        $AnimalsPart1[$continent][] = $pieces[0];
+        $AnimalsPart2[] = $pieces[1];
     }
 }    
 
 shuffle($AnimalsPart2);
 
+$NewAnimals = [];
 $i=0;
 foreach ($AnimalsPart1 as $continent => $animaltypes) {
     foreach ($animaltypes as $animaltype) {
@@ -65,12 +72,10 @@ echo '<h2>Массив новый:</h2>';
 echo '<pre>';
 print_r($NewAnimals);
 
+echo PHP_EOL;
+echo '<h2>Массив форматированный, с запятыми:</h2>';
 foreach ($NewAnimals as $continent => $animaltypes) {
     echo "<h2>$continent</h2>";
-    $RowNum = count($NewAnimals[$continent]);
-    for ($i = 0; $i < $RowNum-1; $i++) {
-         echo $NewAnimals[$continent][$i] . ', ';
-    }
-        echo $NewAnimals[$continent][$i];
+    echo (implode (", ", $animaltypes));
 }
 ?>
