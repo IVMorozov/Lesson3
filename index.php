@@ -47,7 +47,7 @@ echo '<pre>';
 print_r($TwoWordAnimals);
 
 $AnimalsPart1 = [];
-$AnimalsPart1 = [];
+$AnimalsPart2 = [];
 
 foreach ($TwoWordAnimals as $continent => $animaltypes) {
     foreach ($animaltypes as $animaltype) {
